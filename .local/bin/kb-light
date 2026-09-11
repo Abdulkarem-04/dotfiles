@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ "$1" == "on" ]; then
+    echo 1 | sudo tee /sys/class/leds/*::scrolllock/brightness > /dev/null
+    echo "Keyboard lights turned ON"
+elif [ "$1" == "off" ]; then
+    echo 0 | sudo tee /sys/class/leds/*::scrolllock/brightness > /dev/null
+    echo "Keyboard lights turned OFF"
+else
+    echo "Usage: kb-light on | off"
+fi
