@@ -1,3 +1,5 @@
+export PATH="$HOME/.local/bin:$PATH"
+
 # Command History Configuration
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -33,3 +35,4 @@ alias nano="nvim"
 alias vim="nvim"
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias lg-dot='lazygit --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

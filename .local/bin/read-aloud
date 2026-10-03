@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Check if the audio player is currently running the speech
+if pgrep -f "mpv --no-video -" >/dev/null; then
+  pkill -f "edge-tts"
+  pkill -f "mpv --no-video -"
+  notify-send "Read Aloud" "Stopped." --icon=audio-volume-muted
+  exit 0
+fi
+
+# Grab the highlighted text (Wayland Primary Clipboard)
+TEXT=$(wl-paste -p)
+
+if [ -z "$TEXT" ]; then
+  notify-send "Read Aloud Error" "No text highlighted!" --icon=dialog-error
+  exit 1
+fi
+
+notify-send "Read Aloud" "Reading..." --icon=audio-volume-high
+
+/home/dezba/.local/bin/edge-tts --voice "en-IE-EmilyNeural" --text "$TEXT" | /usr/bin/mpv --no-video -
